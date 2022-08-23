@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Personal_Website.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<Personal_WebsiteContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Personal_WebsiteContext") ?? throw new InvalidOperationException("Connection string 'Personal_WebsiteContext' not found.")));
 
 var app = builder.Build();
 
